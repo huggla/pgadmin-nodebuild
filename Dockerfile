@@ -30,8 +30,10 @@ RUN apk add --no-cache \
 # Create the /pgadmin4 directory and copy the source into it. Explicitly
 # remove the node_modules directory as we'll recreate a clean version, as well
 # as various other files we don't want
-COPY web /pgadmin4/web
-RUN rm -rf /pgadmin4/web/*.log \
+RUN wget https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v4.20/source/pgadmin4-4.20.tar.gz \
+&& tar -xvpf pgadmin4-4.20.tar.gz \
+&& mv pgadmin4-4.20 pgadmin4 \
+&& rm -rf /pgadmin4/web/*.log \
            /pgadmin4/web/config_*.py \
            /pgadmin4/web/node_modules \
            /pgadmin4/web/regression \
